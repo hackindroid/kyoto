@@ -3,4 +3,22 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Welcome to Akashvani</string>
+    <string name="slide_1_desc">Swipe Right to continue</string>
+
+    <string name="slide_2_title">Detailed Weather Info</string>
+    <string name="slide_2_desc">I get you the most accurate &amp; detailed information about current weather</string>
+
+    <string name="slide_3_title">Weather Forecasts</string>
+    <string name="slide_3_desc">Get weather forecasts for the next 7 days</string>
+
+    <string name="slide_4_title">Multiple Locations</string>
+    <string name="slide_4_desc">Get detailed weather information for multiple cities at the same time</string>
+    <string name="title_activity_settings">Settings</string>
+
 </resources>
