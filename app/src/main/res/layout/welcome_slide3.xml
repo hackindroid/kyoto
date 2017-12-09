@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    android:background="@color/bg_screen3">
+
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="56dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:gravity="center">
+
+        <TextView
+            android:padding="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/slide_3_title"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/slide_title"
+            android:textAlignment="center"
+            android:textStyle="bold" />
+
+        <com.github.florent37.materialtextfield.MaterialTextField
+            app:mtf_backgroundColor="@android:color/white"
+            android:layout_width="@dimen/first_input_width"
+            android:layout_height="wrap_content"
+            app:mtf_labelColor="@android:color/white"
+            app:mtf_image="@drawable/ic_person_black_24dp"
+            app:mtf_openKeyboardOnFocus="true"
+            >
+
+            <EditText
+                android:id="@+id/et_user_name"
+                android:inputType="textCapWords"
+                android:textColorHint="@android:color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/name"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+
+        </com.github.florent37.materialtextfield.MaterialTextField>
+
+        <com.jaredrummler.materialspinner.MaterialSpinner
+            android:shadowRadius="20"
+            app:ms_background_color="@android:color/white"
+            android:layout_marginTop="20dp"
+            android:id="@+id/spinner_branch"
+            android:layout_width="@dimen/first_input_width"
+            android:layout_height="wrap_content" />
+        <com.jaredrummler.materialspinner.MaterialSpinner
+            android:shadowRadius="20"
+            app:ms_background_color="@android:color/white"
+            android:layout_marginTop="20dp"
+            android:id="@+id/spinner_year"
+            android:layout_width="@dimen/first_input_width"
+            android:layout_height="wrap_content" />
+        <!--<android.support.design.widget.TextInputLayout
+            android:textColorHint="@android:color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <EditText
+                android:textColorLink="@android:color/white"
+                android:shadowColor="@android:color/white"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textColorHighlight="@android:color/white"
+                android:id="@+id/input_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:hint="Email" />
+        </android.support.design.widget.TextInputLayout>
+
+        &lt;!&ndash; Password Label &ndash;&gt;
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <EditText android:id="@+id/input_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:hint="Password"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_login"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:padding="12dp"
+            android:text="Login"/>
+
+        <TextView android:id="@+id/link_signup"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="No account yet? Create one"
+            android:gravity="center"
+            android:textSize="16dip"/>-->
+
+    </LinearLayout>
+</ScrollView>
+
+<!--
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_screen3">
+
+    <TextView
+        android:padding="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/slide_3_title"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/slide_title"
+        android:textAlignment="center"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="Name "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30sp"
+                android:paddingLeft="@dimen/desc_padding"
+                android:paddingRight="@dimen/desc_padding"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/slide_desc"/>
+        </LinearLayout>
+
+        &lt;!&ndash; Email Label &ndash;&gt;
+        <android.support.design.widget.TextInputLayout
+            android:textColorHint="@android:color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <EditText android:id="@+id/input_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:hint="Email" />
+        </android.support.design.widget.TextInputLayout>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20sp"
+            android:paddingLeft="@dimen/desc_padding"
+            android:paddingRight="@dimen/desc_padding"
+            android:text="@string/slide_3_desc"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/slide_desc" />
+
+    </LinearLayout>
+
+</RelativeLayout>-->
