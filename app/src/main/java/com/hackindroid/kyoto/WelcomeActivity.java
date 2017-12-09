@@ -13,6 +13,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -108,10 +109,11 @@ public class WelcomeActivity extends AppCompatActivity {
                     // move to next screen
                     viewPager.setCurrentItem(current);
                 } else {
-                    if(validInputBranch && validInputYear){
+                    if(validInputBranch && validInputYear && etUserName != null && (!TextUtils.isEmpty(etUserName.getText().toString()))){
+                        prefManager.setUserName(etUserName.getText().toString());
                         launchHomeScreen();
                     } else {
-                        Snackbar.make(findViewById(android.R.id.content), "Select Year And Branch", Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(findViewById(android.R.id.content), "Select Name, Year And Branch", Snackbar.LENGTH_LONG).show();
                     }
                 }
             }
@@ -205,7 +207,9 @@ public class MyViewPagerAdapter extends PagerAdapter {
 
         View view = layoutInflater.inflate(layouts[position], container, false);
         container.addView(view);
-
+        if(etUserName == null) {
+            etUserName = view.findViewById(R.id.et_user_name);
+        }
         setupDataLayout(view);
 
         return view;
@@ -240,7 +244,7 @@ public class MyViewPagerAdapter extends PagerAdapter {
 
                 @Override
                 public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-                    if (item.compareTo(selBranch)!=0){
+                    if (!item.equals(selBranch)){
                         validInputBranch = true;
                         prefManager.setBranch(position - 1);
                     } else {
@@ -261,7 +265,7 @@ public class MyViewPagerAdapter extends PagerAdapter {
 
                 @Override
                 public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-                    if (item.compareTo(selYear)!=0){
+                    if (!item.equals(selYear)){
                         validInputYear = true;
                         prefManager.setYear(position - 1);
                     } else {

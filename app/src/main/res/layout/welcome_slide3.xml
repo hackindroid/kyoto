@@ -37,6 +37,7 @@
             >
 
             <EditText
+                android:id="@+id/et_user_name"
                 android:inputType="textCapWords"
                 android:textColorHint="@android:color/white"
                 android:layout_width="match_parent"
