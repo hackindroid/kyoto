@@ -1,25 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.hackindroid.kyoto.MainActivity">
 
-    <TextView
-        android:id="@+id/message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="@string/title_home" />
+    <LinearLayout
+        android:id="@+id/main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/navigation"
+        android:orientation="vertical">
+
+        <!--<FrameLayout-->
+        <!--android:id="@+id/fl_main"-->
+        <!--android:background="@android:color/holo_red_light"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="48dp">-->
+
+        <!--<com.ogaclejapan.smarttablayout.SmartTabLayout-->
+        <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+        <!--android:id="@+id/view_pager_tab"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="48dp"-->
+        <!--android:clipToPadding="false"-->
+        <!--android:paddingLeft="4dp"-->
+        <!--android:paddingRight="4dp"-->
+        <!--app:stl_distributeEvenly="true"-->
+        <!--app:stl_defaultTabTextColor="@android:color/black"-->
+        <!--app:stl_defaultTabTextHorizontalPadding="18dp"-->
+        <!--app:stl_dividerColor="@android:color/transparent"-->
+        <!--app:stl_dividerThickness="0dp"-->
+        <!--app:stl_indicatorColor="@android:color/white"-->
+        <!--app:stl_indicatorCornerRadius="18dp"-->
+        <!--app:stl_indicatorGravity="center"-->
+        <!--app:stl_indicatorInterpolation="smart"-->
+        <!--app:stl_indicatorThickness="36dp"-->
+        <!--app:stl_underlineColor="@android:color/transparent"-->
+        <!--app:stl_underlineThickness="0dp" />-->
+
+        <!--</FrameLayout>-->
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tab_Resources"
+                app:tabTextAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                app:tabSelectedTextColor="@color/colorPrimary"
+                app:tabTextColor="@android:color/darker_gray"
+                app:tabGravity="fill"
+                app:tabIndicatorColor="@color/colorPrimaryDark"
+                app:tabIndicatorHeight="2dp"
+                app:tabMode="fixed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </android.support.v4.view.ViewPager>
+
+    </LinearLayout>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
-        android:layout_width="wrap_content"
-        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:background="?android:attr/windowBackground"
         app:menu="@menu/navigation" />
 
-</FrameLayout>
+</RelativeLayout>
