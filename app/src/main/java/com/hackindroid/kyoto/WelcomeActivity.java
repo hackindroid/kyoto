@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -18,13 +19,22 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hackindroid.kyoto.utils.PrefManager;
+import com.hackindroid.kyoto.utils.Util;
+import com.jaredrummler.materialspinner.MaterialSpinner;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class WelcomeActivity extends AppCompatActivity {
 
+    private boolean validInputBranch = false;
+    private boolean validInputYear = false;
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
     private LinearLayout dotsLayout;
@@ -32,6 +42,7 @@ public class WelcomeActivity extends AppCompatActivity {
     private int[] layouts;
     private Button btnSkip, btnNext;
     private PrefManager prefManager;
+    private EditText etUserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +67,9 @@ public class WelcomeActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
         btnSkip = (Button) findViewById(R.id.btn_skip);
+
+        btnSkip.setVisibility(View.GONE);
+
         btnNext = (Button) findViewById(R.id.btn_next);
 
 
@@ -64,8 +78,7 @@ public class WelcomeActivity extends AppCompatActivity {
         layouts = new int[]{
                 R.layout.welcome_slide1,
                 R.layout.welcome_slide2,
-                R.layout.welcome_slide3,
-                R.layout.welcome_slide4};
+                R.layout.welcome_slide3};
 
         // adding bottom dots
         addBottomDots(0);
@@ -75,6 +88,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
         myViewPagerAdapter = new MyViewPagerAdapter();
         viewPager.setAdapter(myViewPagerAdapter);
+        viewPager.setOffscreenPageLimit(layouts.length - 1);
         viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
 
         btnSkip.setOnClickListener(new View.OnClickListener() {
@@ -94,11 +108,17 @@ public class WelcomeActivity extends AppCompatActivity {
                     // move to next screen
                     viewPager.setCurrentItem(current);
                 } else {
-                    launchHomeScreen();
+                    if(validInputBranch && validInputYear){
+                        launchHomeScreen();
+                    } else {
+                        Snackbar.make(findViewById(android.R.id.content), "Select Year And Branch", Snackbar.LENGTH_LONG).show();
+                    }
                 }
             }
         });
     }
+
+
 
     private void addBottomDots(int currentPage) {
         dots = new TextView[layouts.length];
@@ -124,7 +144,7 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     private void launchHomeScreen() {
-        prefManager.setFirstTimeLaunch(false);
+        prefManager.setFirstTimeLaunch(true);  //TODO: change to false
         startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
         finish();
     }
@@ -144,7 +164,7 @@ public class WelcomeActivity extends AppCompatActivity {
             } else {
                 // still pages are left
                 btnNext.setText(getString(R.string.next));
-                btnSkip.setVisibility(View.VISIBLE);
+                btnSkip.setVisibility(View.GONE);
             }
         }
 
@@ -186,6 +206,8 @@ public class MyViewPagerAdapter extends PagerAdapter {
         View view = layoutInflater.inflate(layouts[position], container, false);
         container.addView(view);
 
+        setupDataLayout(view);
+
         return view;
     }
 
@@ -204,6 +226,52 @@ public class MyViewPagerAdapter extends PagerAdapter {
     public void destroyItem(ViewGroup container, int position, Object object) {
         View view = (View) object;
         container.removeView(view);
+    }
+    private void setupDataLayout(View view) {
+
+        final String selBranch = "Select Branch";
+        MaterialSpinner spinnerBranch = (MaterialSpinner) view.findViewById(R.id.spinner_branch);
+        if(spinnerBranch!=null) {
+
+            List<String> list = new ArrayList<>(Arrays.asList(Util.Branches));
+            list.add(0, selBranch);
+            spinnerBranch.setItems(list);
+            spinnerBranch.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+                @Override
+                public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                    if (item.compareTo(selBranch)!=0){
+                        validInputBranch = true;
+                        prefManager.setBranch(position - 1);
+                    } else {
+                        validInputBranch = false;
+                    }
+                }
+            });
+        }
+
+
+        final String selYear = "Select Year";
+        MaterialSpinner spinnerYear = (MaterialSpinner) view.findViewById(R.id.spinner_year);
+        if(spinnerYear!=null) {
+            List<String> list = new ArrayList<>(Arrays.asList(Util.Years));
+            list.add(0, selYear);
+            spinnerYear.setItems(list);
+            spinnerYear.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+                @Override
+                public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                    if (item.compareTo(selYear)!=0){
+                        validInputYear = true;
+                        prefManager.setYear(position - 1);
+                    } else {
+                        validInputYear = false;
+                    }
+                }
+            });
+        }
+
+
     }
 }
 }

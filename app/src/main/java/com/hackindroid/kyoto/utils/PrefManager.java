@@ -17,10 +17,13 @@ public class PrefManager {
     int PRIVATE_MODE = 0;
 
     // Shared preferences file name
-    private static final String PREF_NAME = "akashvani";
+    private static final String PREF_NAME = "notesPref";
 
     private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
-    private static final String IS_TEMP_FAHRENHEIT = "IsTempFahrenheit";
+    private static final String USER_NAME= "UserName";
+    private static final String USER_BRANCH= "UserBranch";
+    private static final String USER_YEAR= "UserYear";
+
 
     public PrefManager(Context context) {
         this._context = context;
@@ -37,12 +40,31 @@ public class PrefManager {
         return pref.getBoolean(IS_FIRST_TIME_LAUNCH, true);
     }
 
-    public void setTempFahrenheit(boolean temp) {
-        editor.putBoolean(IS_TEMP_FAHRENHEIT, temp);
+    public void setUserName(String name){
+        editor.putString(USER_NAME, name);
         editor.commit();
     }
-    public boolean isTempFahrenheit() {
-        return pref.getBoolean(IS_TEMP_FAHRENHEIT, true);
+
+    public String getUserName(){
+        return  pref.getString(USER_NAME, null);
+    }
+
+    public void setBranch(int branch){
+        editor.putInt(USER_BRANCH, branch);
+        editor.commit();
+    }
+
+    public int getBranch(){
+        return pref.getInt(USER_BRANCH, -1);
+    }
+
+    public void setYear(int year){
+        editor.putInt(USER_YEAR, year);
+        editor.commit();
+    }
+
+    public int getYear(){
+        return pref.getInt(USER_YEAR, -1);
     }
 
 }
