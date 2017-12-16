@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "98747826238",
+    "firebase_url": "https://kyoto-e42c4.firebaseio.com",
+    "project_id": "kyoto-e42c4",
+    "storage_bucket": "kyoto-e42c4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:98747826238:android:d1bdd5dd9fd9b6f2",
+        "android_client_info": {
+          "package_name": "com.hackindroid.kyoto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "98747826238-88v4p9t5ra74bqt9rto5f5huf2ki8c77.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hackindroid.kyoto",
+            "certificate_hash": "6ef97e7c2d354e10905e486eef8cfac579c3a416"
+          }
+        },
+        {
+          "client_id": "98747826238-q6bfmtqbdnt851dgn8p9dpmm0ut5h6re.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8-R_gJo3d9TUGzbjsjuYgPFQfXonNnOA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "98747826238-q6bfmtqbdnt851dgn8p9dpmm0ut5h6re.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
