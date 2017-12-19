@@ -20,6 +20,7 @@ android:layout_height="match_parent">
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp">
         <EditText
+            android:inputType="textCapWords"
             android:id="@+id/etName"
             android:autoSizeMinTextSize="26sp"
             android:autoSizeMaxTextSize="26sp"
@@ -40,6 +41,7 @@ android:layout_height="match_parent">
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp">
         <EditText
+            android:inputType="textCapWords"
             android:id="@+id/etYear"
             android:autoSizeMinTextSize="26sp"
             android:autoSizeMaxTextSize="26sp"
@@ -59,6 +61,7 @@ android:layout_height="match_parent">
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp">
         <EditText
+            android:inputType="textCapWords"
             android:id="@+id/etBranch"
             android:autoSizeMinTextSize="26sp"
             android:autoSizeMaxTextSize="26sp"
@@ -78,6 +81,7 @@ android:layout_height="match_parent">
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp">
         <EditText
+            android:inputType="number"
             android:id="@+id/etPhone"
             android:autoSizeMinTextSize="26sp"
             android:autoSizeMaxTextSize="26sp"
@@ -97,6 +101,27 @@ android:layout_height="match_parent">
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp">
         <EditText
+            android:inputType="number"
+            android:id="@+id/etPrice"
+            android:autoSizeMinTextSize="26sp"
+            android:autoSizeMaxTextSize="26sp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#FFFFFF"
+            android:hint="Price"
+            android:textColorHint="#607D8B"
+            android:textSize="14sp"
+            android:padding="8dp" />
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:backgroundTint="#FFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp">
+        <EditText
+            android:inputType="textCapWords"
             android:id="@+id/etTitle"
             android:autoSizeMinTextSize="26sp"
             android:autoSizeMaxTextSize="26sp"
@@ -111,7 +136,7 @@ android:layout_height="match_parent">
     <android.support.v7.widget.CardView
         android:backgroundTint="#FFFFFF"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         android:layout_margin="24dp">
         <EditText
             android:minLines="2"
@@ -121,7 +146,7 @@ android:layout_height="match_parent">
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#FFFFFF"
-            android:hint="Description"
+            android:hint="Author Or Description"
             android:textColorHint="#607D8B"
             android:textSize="14sp"
             android:padding="8dp" />

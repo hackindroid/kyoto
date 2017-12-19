@@ -1,154 +1,83 @@
 package com.hackindroid.kyoto.activities;
 
-import android.content.res.Resources;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.telecom.Call;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.hackindroid.kyoto.R;
-import com.hackindroid.kyoto.api.DownloadFile;
-import com.hackindroid.kyoto.models.APIService;
-import com.hackindroid.kyoto.models.SellDetails;
+import com.hackindroid.kyoto.models.AdDetails;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Writer;
-import java.net.URL;
 import java.util.ArrayList;
-
-import retrofit2.Callback;
-import retrofit2.Response;
+import java.util.UUID;
 
 public class SellActivity extends AppCompatActivity {
-    ArrayList<SellDetails> sellDetails = new ArrayList<>();
-    private StorageReference storageReference;
-EditText etName,etYear,etBranch,etPhone,etTitle,etDesc;
+EditText etName,etYear,etBranch,etPhone,etTitle,etDesc,etPrice;
 Button btnPublish;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mDatabaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sell);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         etName = findViewById(R.id.etName);
-        storageReference = FirebaseStorage.getInstance().getReference();
+        etPrice = findViewById(R.id.etPrice);
+        etBranch = findViewById(R.id.etBranch);
+        etPhone = findViewById(R.id.etPhone);
+        etTitle = findViewById(R.id.etTitle);
+        etDesc = findViewById(R.id.etDesc);
         etYear = findViewById(R.id.etYear);
         btnPublish = findViewById(R.id.btnPublish);
         btnPublish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(check() == true) {
 
-                       /* setName();
-                        createJSONFolder();
-                        CompositionJso obj = new CompositionJso();*/
-                       JSONObject obj;
-                        obj = makeJSONObject("hi", "hi", "hi", "hi");
-
-                        try {
-                            //Writer output = null;
-                            //File file = new File(getFilesDir(),"anubhav.json");
-                           // output = new BufferedWriter(new FileWriter(file));
-                            //output.write(obj.toString());
-                            //output.close();
-                           // Toast.makeText(getApplicationContext(), "Composition saved", Toast.LENGTH_LONG).show();
-                            //readfile();
-                            //retrieveData();
-                            //uploadjson();
-                            //testing();
-                           /* APIService.getApi().getDetails().enqueue(new Callback<ArrayList<SellDetails>>() {
-                                @Override
-                                public void onResponse(retrofit2.Call<ArrayList<SellDetails>> call, Response<ArrayList<SellDetails>> response) {
-                                    int x = response.body().size();
-                                    String y = response.body().get(0).getDesc();
-                                    Toast.makeText(SellActivity.this,x+y,Toast.LENGTH_LONG).show();
-                                }
-
-                                @Override
-                                public void onFailure(retrofit2.Call<ArrayList<SellDetails>> call, Throwable t) {
-
-                                }
-                            });*/
-                            new DownloadFile(SellActivity.this).execute("hi");
-
-                        } catch (Exception e) {
-                            Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-                        }
-
-                        //finish();
+                    initFirebase();
+                    createAd();
+                    finish();
+                }
             }
+
+
         });
 
     }
-    void testing(){
+    private Boolean check(){
+        Boolean name = etName.getText().toString().equals("");
+        Boolean price = etPrice.getText().toString().equals("");
+        Boolean branch = etBranch.getText().toString().equals("");
+        Boolean phone = etPhone.getText().toString().equals("");
+        Boolean title = etTitle.getText().toString().equals("");
+        Boolean year = etYear.getText().toString().equals("");
 
-    }
-    void uploadjson(){
-        StorageReference pathReference = storageReference.child("Ads/53637183.jpg");
 
-    }
-    void readfile() throws IOException {
-        //Toast.makeText(getApplicationContext(),retrieveData(),Toast.LENGTH_LONG).show();
-
-    }
-    public JSONObject makeJSONObject (String title, String desc, String imgPath, String imgView) {
-
-        JSONObject obj = new JSONObject() ;
-
-        try {
-            obj.put("title", title);
-            obj.put("desc", desc);
-            obj.put("imgPath", imgPath);
-            obj.put("imgViewPath", imgView);
-        } catch (JSONException e) {
-            e.printStackTrace();
+        if (name || price || branch || phone || title || year)
+        {
+            Toast.makeText(SellActivity.this,"Make Sure Every Field is Filled",Toast.LENGTH_LONG).show();
+            return false;
         }
-
-        return obj;
+        return true;
     }
-    void retrieveData () throws IOException {
-
-        File f = new File(getFilesDir(), "anubhav.json");
-        //f.toURI();
-        Uri uri = Uri.fromFile(f);
-        StorageReference filePath = storageReference.child("Ads").child(uri.getLastPathSegment());
-        filePath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Uri downloadUrl = taskSnapshot.getDownloadUrl();
-           //Toast.makeText(SellActivity.this,downloadUrl.toString(),Toast.LENGTH_LONG).show();
-
-            }
-        });
-        //FileInputStream fis = new FileInputStream(f);
-/*
-        String buf = "";
-        StringBuilder sb = new StringBuilder();
-        BufferedReader br = new BufferedReader(new InputStreamReader(fis));
-        while (buf != null) {
-            sb.append(buf + "\n");
-            buf = br.readLine();
-        }
-
-        return sb.toString();*/
-
-
+    private void initFirebase() {
+        FirebaseApp.initializeApp(this);
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mDatabaseReference  = mFirebaseDatabase.getReference();
     }
+    private void createAd() {
+        AdDetails adDetails = new AdDetails(etName.getText().toString(),etYear.getText().toString(),etBranch.getText().toString()
+        ,etPhone.getText().toString(),etTitle.getText().toString(),etDesc.getText().toString(),etPrice.getText().toString());
+        mDatabaseReference.child("Ads").child(UUID.randomUUID().toString()).setValue(adDetails);
+    }
+
 }
 

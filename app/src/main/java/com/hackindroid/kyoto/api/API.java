@@ -2,7 +2,7 @@ package com.hackindroid.kyoto.api;
 
 
 
-import com.hackindroid.kyoto.models.SellDetails;
+import com.hackindroid.kyoto.models.AdDetails;
 
 import java.util.ArrayList;
 
@@ -15,5 +15,5 @@ import retrofit2.http.GET;
 
 public interface API {
     @GET("/Ads/anubhav.json")
-    Call<ArrayList<SellDetails>> getDetails();
+    Call<ArrayList<AdDetails>> getDetails();
 }
