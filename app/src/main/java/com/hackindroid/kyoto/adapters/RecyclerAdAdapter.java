@@ -22,15 +22,27 @@ import java.util.ArrayList;
 
 public class RecyclerAdAdapter extends RecyclerView.Adapter<RecyclerAdAdapter.MyHolder> {
     Context context;
-    ArrayList<AdDetails> detailsArrayList;
+    ArrayList<AdDetails> detailsArrayListComplete;
+    ArrayList<AdDetails> detailsArrayListFiltered;
 
-
+    public static final int RESET_FILTER = 1;
+    public static final int RESET_NONE = 0;
     public RecyclerAdAdapter(Context context, ArrayList<AdDetails> detailsArrayList) {
         this.context = context;
-        this.detailsArrayList = detailsArrayList;
+        this.detailsArrayListComplete = detailsArrayList;
+        this.detailsArrayListFiltered = detailsArrayList;
     }
-    public void updateDetails(ArrayList<AdDetails> adDetails){
-        detailsArrayList = adDetails;
+    public void updateDetails(ArrayList<AdDetails> adDetails, int i){
+
+        detailsArrayListComplete = adDetails;
+        notifyDataSetChanged();
+        if(i == RESET_FILTER) {
+            detailsArrayListFiltered = detailsArrayListComplete;
+        }
+    }
+    private void updateDetailsFiltered(ArrayList<AdDetails> adDetails){
+
+        detailsArrayListFiltered = adDetails;
         notifyDataSetChanged();
     }
 
@@ -43,9 +55,9 @@ public class RecyclerAdAdapter extends RecyclerView.Adapter<RecyclerAdAdapter.My
 
     @Override
     public void onBindViewHolder(final MyHolder holder, int position) {
-        holder.tvName.setText(detailsArrayList.get(position).getName());
-        holder.tvDesc.setText(detailsArrayList.get(position).getBookDesc());
-        holder.tvPrice.setText(detailsArrayList.get(position).getPrice());
+        holder.tvName.setText(detailsArrayListFiltered.get(position).getName());
+        holder.tvDesc.setText(detailsArrayListFiltered.get(position).getBookDesc());
+        holder.tvPrice.setText(detailsArrayListFiltered.get(position).getPrice());
         holder.ivCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,7 +74,7 @@ public class RecyclerAdAdapter extends RecyclerView.Adapter<RecyclerAdAdapter.My
 
     @Override
     public int getItemCount() {
-        return detailsArrayList.size();
+        return detailsArrayListFiltered.size();
     }
 
     public class MyHolder extends RecyclerView.ViewHolder {

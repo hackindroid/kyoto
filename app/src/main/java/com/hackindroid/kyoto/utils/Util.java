@@ -7,9 +7,15 @@ package com.hackindroid.kyoto.utils;
 public class Util {
         public static final String[] Branches= {
                 "COE",
+                "IT",
+                "SE",
                 "ECE",
+                "EEE",
                 "EE",
-                "ME"
+                "MCE",
+                "ME",
+                "CE",
+                "EP"
         };
         public static final String[] Years= {
                 "First",
